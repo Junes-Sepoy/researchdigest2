@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Kaha Mind</title>
+    <link rel="stylesheet" href="https://use.typekit.net/gmb7aei.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Background with characters -->
+        <div class="page-background"></div>
+
+        <!-- Header with logo and navigation -->
+        <header>
+            <h1 class="logo">
+                <span class="logo-line">Kaha</span>
+                <span class="logo-line">Mind</span>
+            </h1>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="contact.html">Contact</a>
+                <a href="services.html">Services</a>
+                <a href="dossier.html">The Dossier</a>
+                <a href="shop.html">Shop</a>
+                <a href="faq.html">FAQs</a>
+                <a href="edge.html">The Edge</a>
+            </nav>
+        </header>
+
+        <!-- Main content -->
+        <main>
+            <!-- Page title -->
+            <section class="page-header">
+                <h2>Contact</h2>
+            </section>
+
+            <!-- Contact Info -->
+            <section class="contact-info">
+                <p class="contact-text">Signal/Whatsapp us at <a href="https://wa.me/919266870877" target="_blank">+91 92668 70877</a></p>
+                <p class="contact-text">Write to us at <a href="mailto:hello@kahamind.com">hello@kahamind.com</a></p>
+                <p class="contact-text or-text">OR</p>
+                <p class="contact-text">Fill up this form and we'll get back to you as soon as possible!</p>
+            </section>
+
+            <!-- Contact Form -->
+            <section class="contact-form-section">
+                <!-- Success/Error Messages -->
+                <div id="formMessage" style="display: none; padding: 15px; margin-bottom: 20px; border-radius: 4px; text-align: center; font-size: 16px;"></div>
+                
+                <!--
+                    FORM NOW USES WEB3FORMS (free, no PHP needed).
+                    Steps to activate:
+                    1. Go to https://web3forms.com
+                    2. Enter hello@kahamind.com and click "Create Access Key"
+                    3. Check your inbox and copy the Access Key they send you
+                    4. Replace YOUR_ACCESS_KEY_HERE below with that key
+                    5. Save and upload this file — done!
+                    You can then delete send-email.php from your server.
+                -->
+                <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    
+                    <!-- Web3Forms required hidden fields -->
+                    <input type="hidden" name="access_key" value="37b5f01a-e781-4f14-9931-036def961192">
+                    <input type="hidden" name="subject" value="New Contact Form Submission - Kaha Mind">
+                    <input type="hidden" name="from_name" value="Kaha Mind Website">
+                    <!-- Honeypot spam protection -->
+                    <input type="checkbox" name="botcheck" style="display: none;">
+
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- Footer with dark blue background -->
+        <footer class="footer-waves">
+            <div class="footer-layer footer-4"></div>
+            <div class="footer-layer footer-3"></div>
+            <div class="footer-layer footer-2"></div>
+            <div class="footer-layer footer-1"></div>
+            
+            <!-- Footer Content -->
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h2>Reach out to us:</h2>
+                    <p class="email">hello<span class="at-symbol">@</span><br>Kahamind.com</p>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-column">
+                        <a href="index.html">Home</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="services.html">Services</a>
+                        <a href="dossier.html">The Dossier</a>
+                        <a href="shop.html">Shop</a>
+                        <a href="faq.html">FAQs</a>
+                    </div>
+                    
+                    <div class="footer-column footer-social">
+                        <p class="social-header">Also find<br>us on:</p>
+                        <a href="https://www.facebook.com/KahaMind/" target="_blank">Facebook</a>
+                        <a href="https://www.instagram.com/kaha.mind/" target="_blank">Instagram</a>
+                        <a href="https://x.com/kahamind" target="_blank">X</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Handle form submission via fetch (no page reload, clean UX)
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const messageDiv = document.getElementById('formMessage');
+            const submitBtn = form.querySelector('.submit-btn');
+
+            // Disable button while submitting
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: new FormData(form)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    messageDiv.textContent = "Thank you! Your message has been sent successfully. We'll get back to you soon.";
+                    messageDiv.style.backgroundColor = '#d4edda';
+                    messageDiv.style.color = '#155724';
+                    messageDiv.style.border = '1px solid #c3e6cb';
+                    messageDiv.style.display = 'block';
+                    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    form.reset();
+                    setTimeout(function() { messageDiv.style.display = 'none'; }, 6000);
+                } else {
+                    throw new Error(data.message || 'Submission failed');
+                }
+
+            } catch (error) {
+                messageDiv.textContent = 'Something went wrong. Please try again or email us directly at hello@kahamind.com';
+                messageDiv.style.backgroundColor = '#f8d7da';
+                messageDiv.style.color = '#721c24';
+                messageDiv.style.border = '1px solid #f5c6cb';
+                messageDiv.style.display = 'block';
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(function() { messageDiv.style.display = 'none'; }, 6000);
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        });
+
+        // Fallback: handle ?success or ?error in URL
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const messageDiv = document.getElementById('formMessage');
+            
+            if (urlParams.has('success')) {
+                messageDiv.textContent = "Thank you! Your message has been sent successfully. We'll get back to you soon.";
+                messageDiv.style.backgroundColor = '#d4edda';
+                messageDiv.style.color = '#155724';
+                messageDiv.style.border = '1px solid #c3e6cb';
+                messageDiv.style.display = 'block';
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                document.getElementById('contactForm').reset();
+                setTimeout(function() {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            } else if (urlParams.has('error')) {
+                messageDiv.textContent = decodeURIComponent(urlParams.get('error'));
+                messageDiv.style.backgroundColor = '#f8d7da';
+                messageDiv.style.color = '#721c24';
+                messageDiv.style.border = '1px solid #f5c6cb';
+                messageDiv.style.display = 'block';
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(function() {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
